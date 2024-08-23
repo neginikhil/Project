@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css";
 
 const SignupForm = ({ setFormType }) => {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
     password: ''
   });
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -18,7 +20,7 @@ const SignupForm = ({ setFormType }) => {
     console.log('Submitting form data:', formData);
 
     try {
-      const response = await fetch('YOUR_BACKEND_API_URL/signup', {
+      const response = await fetch('http://localhost:8080/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,8 +31,12 @@ const SignupForm = ({ setFormType }) => {
       console.log('Response status:', response.status);
 
       if (response.ok) {
+        
         const userData = await response.json();
+        
+        
         console.log('Signup successful, user data:', userData);
+        navigate('/login')
 
         Toastify({
           text: "Signup successful!",
@@ -38,7 +44,15 @@ const SignupForm = ({ setFormType }) => {
           className: "info",
           duration: 3000
         }).showToast();
+
+        setFormData({
+          name :"",
+          email: "",
+          password:""
+        })
       } else {
+        console.log("inside error");
+        
         console.error('Signup failed with status:', response.status);
         Toastify({
           text: "Signup failed! Please check your details.",
@@ -63,13 +77,13 @@ const SignupForm = ({ setFormType }) => {
       <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-2xl text-[#00df9a] font-bold text-center mb-6">Sign Up</h2>
         <div className="mb-4">
-          <label className="block text-gray-400 mb-2" htmlFor="username">Username</label>
+          <label className="block text-gray-400 mb-2" htmlFor="name">Name</label>
           <input
             className="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#00df9a]"
             type="text"
-            id="username"
-            placeholder="Enter your username"
-            value={formData.username}
+            id="name"
+            placeholder="Enter your name"
+            value={formData.name}
             onChange={handleChange}
             required
           />

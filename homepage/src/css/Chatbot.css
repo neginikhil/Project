@@ -1,0 +1,69 @@
+/* Chatbot.css */
+.h-100 {
+    height: 100% !important;
+}
+
+.chat {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.msg_head {
+    background: #e74c3c;
+    color: white;
+    font-size: 15px;
+}
+
+.online_icon {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background-color: #4cd137;
+    border-radius: 50%;
+    bottom: 0.2em;
+    right: 0.2em;
+    border: 1.5px solid white;
+}
+
+.msg_card_body {
+    overflow-y: auto;
+}
+
+.msg_cotainer_send {
+    background-color: #ececec;
+    border-radius: 25px;
+    padding: 10px;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.msg_cotainer {
+    background-color: #82ccdd;
+    border-radius: 25px;
+    padding: 10px;
+    position: relative;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.msg_time_send {
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    font-size: 10px;
+    color: gray;
+}
+
+.msg_time {
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+    font-size: 10px;
+    color: gray;
+}
+
+.send_btn {
+    background-color: #e74c3c;
+    color: white;
+}

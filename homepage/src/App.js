@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignUpForm';
 import Dashboard from './components/Dashboard';
+import Chatbot from './components/Chatbot';
 
 const AppContent = () => {
   const [user, setUser] = useState(null);
@@ -17,7 +18,8 @@ const AppContent = () => {
 
   const handleLoginSuccess = (userData) => {
     setUser(userData);
-    navigate('/dashboard');
+    
+    navigate('/user/dashboard');
   };
 
   const setShowForm = (type) => {
@@ -44,8 +46,12 @@ const AppContent = () => {
             element={<SignupForm setFormType={setFormType} />} 
           />
           <Route 
-            path="/dashboard" 
+            path="/user/dashboard" 
             element={user ? <Dashboard user={user} /> : <Navigate to="/login" />} 
+          />
+           <Route 
+            path="/chatbot" 
+            element={<Chatbot/>} 
           />
         </Routes>
       </div>

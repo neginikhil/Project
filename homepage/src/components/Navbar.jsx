@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-scroll';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Navbar = ({ setShowForm, handleHomeClick }) => {
   const [nav, setNav] = useState(false);
+  const navigate = useNavigate();
 
   const handleNav = () => {
     setNav(!nav);
   };
+
+  const clickHandler = ()=>{
+    window.location.href='http://127.0.0.1:5000';
+  }
 
   return (
     <div className='fixed top-0 left-0 w-full h-24 bg-[#000300] text-white z-50'>
@@ -22,7 +28,7 @@ const Navbar = ({ setShowForm, handleHomeClick }) => {
           <li className='p-4 cursor-pointer'>Company</li>
           <li className='p-4 cursor-pointer'>Resources</li>
           <li className='p-4 cursor-pointer'>About</li>
-          <li className='p-4 cursor-pointer'>Contact</li>
+          <li className='p-4 cursor-pointer' onClick={clickHandler}>Chatbot</li>
           <li className='p-4 cursor-pointer' onClick={() => setShowForm('login')}>Login</li>
           <li className='p-4 cursor-pointer' onClick={() => setShowForm('signup')}>SignUp</li>
         </ul>
@@ -39,7 +45,7 @@ const Navbar = ({ setShowForm, handleHomeClick }) => {
             <li className='p-4 cursor-pointer border-b border-gray-600'>Company</li>
             <li className='p-4 cursor-pointer border-b border-gray-600'>Resources</li>
             <li className='p-4 cursor-pointer border-b border-gray-600'>About</li>
-            <li className='p-4 cursor-pointer border-b border-gray-600'>Contact</li>
+            <li className='p-4 cursor-pointer border-b border-gray-600'>Chatbot</li>
             <li className='p-4 cursor-pointer border-b border-gray-600' onClick={() => { setShowForm('login'); handleNav(); }}>Login</li>
             <li className='p-4 cursor-pointer border-b border-gray-600' onClick={() => { setShowForm('signup'); handleNav(); }}>Sign Up</li>
         </ul>

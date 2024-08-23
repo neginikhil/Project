@@ -15,38 +15,37 @@ const LoginForm = ({ setFormType, onLoginSuccess }) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  // Inside LoginForm component
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Submitting form data:', formData);
-
+  
     try {
-      const response = await fetch('YOUR_BACKEND_API_URL/login', {
+      const response = await fetch('http://localhost:8080/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(formData),
       });
-
-      console.log('Response status:', response.status);
-
+  
+      const responseData = await response.json(); // Parse JSON
+  
       if (response.ok) {
-        const userData = await response.json();
-        console.log('Login successful, user data:', userData);
-
+        localStorage.setItem('user', JSON.stringify(responseData));
+        console.log('Login successful');
         Toastify({
           text: "Login successful!",
           backgroundColor: "#00df9a",
           className: "info",
           duration: 3000
         }).showToast();
-
-        // Call the onLoginSuccess function passed from AppContent
-        onLoginSuccess(userData);
+        onLoginSuccess(responseData); // Pass user data to onLoginSuccess
       } else {
         console.error('Login failed with status:', response.status);
         Toastify({
-          text: "Login failed! Check your credentials.",
+          text: responseData.message || "Login failed! Check your credentials.",
           backgroundColor: "red",
           className: "error",
           duration: 3000
@@ -62,6 +61,9 @@ const LoginForm = ({ setFormType, onLoginSuccess }) => {
       }).showToast();
     }
   };
+  
+
+  
 
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-gray-900">
